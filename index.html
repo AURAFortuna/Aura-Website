@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA - We Get You Attention!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+  <style>
+    :root {
+      --soft-black: #121212;
+      --light-gray: #f5f5f5;
+      --hot-pink: #FF1493;
+      --pink-accent: #FF69B4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--soft-black);
+      background-color: var(--light-gray);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+      padding: 1.5rem 0;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--soft-black);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--soft-black);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--hot-pink);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 0 5rem;
+      min-height: 100vh;
+      background: linear-gradient(135deg, white, var(--light-gray));
+    }
+
+    .hero-flex-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 45%;
+    }
+
+    .hero-headline {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subhead {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: #444;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .app-store-badge, .play-store-badge {
+      height: 50px;
+      cursor: pointer;
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .app-store-badge:hover, .play-store-badge:hover {
+      transform: translateY(-5px);
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+    }
+
+    .hero-visual {
+      width: 45%;
+      position: relative;
+    }
+
+    /* App Carousel Styles */
+    .app-carousel {
+      width: 100%;
+      position: relative;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: none;
+      width: 100%;
+    }
+
+    .carousel-slide.active {
+      display: block;
+      animation: fadeEffect 1.5s;
+    }
+
+    @keyframes fadeEffect {
+      from {opacity: 0.7;}
+      to {opacity: 1;}
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 8px;
+    }
+
+    .carousel-dot {
+      cursor: pointer;
+      height: 12px;
+      width: 12px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-dot.active, .carousel-dot:hover {
+      background-color: var(--hot-pink);
+    }
+
+    .phone-mockup {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      display: block;
+      transform: perspective(1000px) rotateY(-15deg);
+      box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 5rem 0;
+      background-color: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--hot-pink);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--light-gray);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon img {
+      width: auto;
+      height: auto;
+      max-width: 40px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-desc {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Swipe Preview */
+    .swipe-preview {
+      margin: 4rem 0;
+      overflow: hidden;
+    }
+
+    .swipe-container {
+      display: flex;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1rem;
+      padding: 1rem 0;
+      scrollbar-width: none;
+    }
+
+    .swipe-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .swipe-card {
+      flex: 0 0 280px;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swipe-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 1.5rem;
+    }
+
+    .swipe-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .swipe-tag {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 5rem 0;
+      background-color: var(--light-gray);
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+    }
+
+    .step-card {
+      flex-basis: 30%;
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--hot-pink);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      margin: 1rem auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-icon img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .step-title {
+      margin-bottom: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 5rem 0;
+      background-color: white;
+      position: relative;
+    }
+
+    .testimonial-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .testimonial-slide {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .testimonial-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      object-fit: cover;
+      border: 3px solid var(--hot-pink);
+    }
+
+    .testimonial-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .testimonial-quote:before,
+    .testimonial-quote:after {
+      content: '"';
+      font-size: 2rem;
+      color: var(--hot-pink);
+      position: absolute;
+    }
+
+    .testimonial-quote:before {
+      left: -15px;
+      top: -10px;
+    }
+
+    .testimonial-quote:after {
+      right: -15px;
+      bottom: -10px;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-handle {
+      color: #777;
+      margin-bottom: 1rem;
+    }
+
+    .star-rating {
+      color: var(--hot-pink);
+      margin-bottom: 1rem;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 1s;
+    }
+
+    .dot.active {
+      background: var(--hot-pink);
+    }
+
+    /* Download CTA */
+    .download-cta {
+      padding: 5rem 0;
+      background: linear-gradient(45deg, var(--soft-black), #333);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-headline {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-subhead {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      opacity: 0.8;
+    }
+
+    .qr-code {
+      width: 150px;
+      height: 150px;
+      background: white;
+      margin: 0 auto 2rem;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .download-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .download-btn {
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 2px solid var(--hot-pink);
+      color: var(--hot-pink);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .download-btn:hover {
+      background: var(--hot-pink);
+      color: var(--soft-black);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .download-btn.emerald {
+      border-color: var(--pink-accent);
+      color: var(--pink-accent);
+    }
+
+    .download-btn.emerald:hover {
+      background: var(--pink-accent);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--soft-black);
+      color: var(--light-gray);
+      padding: 5rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      position: relative;
+    }
+
+    .footer-col h4:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background: var(--hot-pink);
+      bottom: -10px;
+      left: 0;
+    }
+
+    .newsletter-input {
+      display: flex;
+      margin-top: 1.5rem;
+    }
+
+    .email-input {
+      padding: 0.75rem 1rem;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 4px 0 0 4px;
+      flex-grow: 1;
+    }
+
+    .submit-btn {
+      padding: 0.75rem 1rem;
+      background: var(--hot-pink);
+      color: var(--soft-black);
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: white;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-icon:hover {
+      background: var(--hot-pink);
+      transform: translateY(-5px);
+    }
+
+    .social-icon img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--hot-pink);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Animation Classes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate {
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+      .hero-flex-container {
+        flex-direction: column;
+      }
+      
+      .hero-content, .hero-visual {
+        width: 100%;
+        margin-bottom: 3rem;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        max-width: 100%;
+      }
+
+      .steps-container {
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .step-card {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-headline {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .cta-headline {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <div class="logo">AURA</div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-flex-container">
+        <div class="hero-content animate">
+          <h1 class="hero-headline">We Get You Attention!</h1>
+          <p class="hero-subhead">Redefine your style with AI-powered fashion recommendations tailored just for you.</p>
+          <div class="cta-buttons">
+            <img src="C:/Nu/Programming/AURA website/images/App.png" alt="Download on the App Store" class="app-store-badge">
+            <img src="C:/Nu/Programming/AURA website/images/Play.png" alt="Get it on Google Play" class="play-store-badge">
+          </div>
+        </div>
+        <div class="hero-visual animate delay-2">
+          <div class="app-carousel">
+            <div class="carousel-container">
+              <div class="carousel-slide active">
+                <img src="C:/Nu/Programming/AURA website/images/photo 1.png" alt="AURA App Interface 1" class="phone-mockup">
+              </div>
+              <div class="carousel-slide">
+                <img src="C:/Nu/Programming/AURA website/images/photo 2.png" alt="AURA App Interface 2" class="phone-mockup">
+              </div>
+              <div class="carousel-slide">
+                <img src="C:/Nu/Programming/AURA website/images/photo 3.png" alt="AURA App Interface 3" class="phone-mockup">
+              </div>
+              <div class="carousel-slide">
+                <img src="C:/Nu/Programming/AURA website/images/photo 4.png" alt="AURA App Interface 3" class="phone-mockup">
+              </div>
+            </div>
+            <div class="carousel-nav">
+              <span class="carousel-dot active" data-slide="0"></span>
+              <span class="carousel-dot" data-slide="1"></span>
+              <span class="carousel-dot" data-slide="2"></span>
+              <span class="carousel-dot" data-slide="3"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title animate">Core Features</h2>
+      <div class="features-grid">
+        <div class="feature-card animate delay-1">
+          <div class="feature-icon">
+            <img src="C:/Nu/Programming/AURA website/images/create-icon.png" alt="Create Your Aura Icon" class="feature-img">
+          </div>
+          <h3 class="feature-title">Create Your Aura</h3>
+          <p class="feature-desc">Swipe to like, save, or shop outfits at the best prices with exclusive discounts.</p>
+        </div>
+        <div class="feature-card animate delay-2">
+          <div class="feature-icon">
+            <img src="C:/Nu/Programming/AURA website/images/leaderboard-icon.png" alt="Leaderboard Icon" class="feature-img">
+          </div>
+          <h3 class="feature-title">Leaderboard</h3>
+          <p class="feature-desc">Compete to top of the charts. Trend globally or in your city.</p>
+        </div>
+        <div class="feature-card animate delay-3">
+          <div class="feature-icon">
+            <img src="C:/Nu/Programming/AURA website/images/stylist-icon.png" alt="AI Stylist Icon" class="feature-img">
+          </div>
+          <h3 class="feature-title">AI Stylist</h3>
+          <p class="feature-desc">Upload your closet. Get daily outfit ideas based on weather, mood, and more.</p>
+        </div>
+      </div>
+      
+      <div class="swipe-preview">
+        <h3 style="text-align: center; margin-bottom: 2rem;">Swipe to Explore</h3>
+        <div class="swipe-container">
+          <div class="swipe-card" style="background-image: url('C:/Nu/Programming/AURA website/images/urban chic 1.jpg');">
+            <div class="swipe-info">
+              <div class="swipe-name">Urban Chic</div>
+              <div class="swipe-tag">@stylediva</div>
+            </div>
+          </div>
+          <div class="swipe-card" style="background-image: url('C:/Nu/Programming/AURA website/images/casual luxe.jpg');">
+            <div class="swipe-info">
+              <div class="swipe-name">Casual Luxe</div>
+              <div class="swipe-tag">@a_rpittt</div>
+            </div>
+          </div>
+          <div class="swipe-card" style="background-image: url('C:/Nu/Programming/AURA website/images/business casual 1.png');">
+            <div class="swipe-info">
+              <div class="swipe-name">Business Casual</div>
+              <div class="swipe-tag">@officestyle</div>
+            </div>
+          </div>
+          <div class="swipe-card" style="background-image: url('C:/Nu/Programming/AURA website/images/weekend vibes.png');">
+            <div class="swipe-info">
+              <div class="swipe-name">Weekend Vibes</div>
+              <div class="swipe-tag">@casualcool</div>
+            </div>
+          </div>
+          <div class="swipe-card" style="background-image: url('C:/Nu/Programming/AURA website/images/night out.jpg');">
+            <div class="swipe-info">
+              <div class="swipe-name">Night Out</div>
+              <div class="swipe-tag">@partyfit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title animate">What Our Users Say</h2>
+      <div class="testimonial-container">
+        <div class="testimonial-slide">
+          <img src="/api/placeholder/80/80" alt="Emma S." class="testimonial-avatar">
+          <p class="testimonial-quote">AURA completely transformed how I shop for clothes. The AI recommendations are spot on, and I've discovered styles I never would have tried before!</p>
+          <h4 class="testimonial-name">Emma S.</h4>
+          <p class="testimonial-handle">@styledwithmaya</p>
+          <div class="star-rating">★★★★★</div>
+        </div>
+      </div>
+      <div class="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="download-cta" id="download">
+    <div class="container">
+      <h2 class="cta-headline animate">Ready to redefine your Aura ?!</h2>
+      <p class="cta-subhead animate delay-1">Download AURA today and discover a new way to express yourself through fashion.</p>
+      <div class="qr-code animate delay-2">
+        <img src="C:/Nu/Programming/AURA website/images/QR.png" alt="Download QR Code">
+      </div>
+      <div class="download-buttons">
+        <button class="download-btn animate delay-3">App Store</button>
+        <button class="download-btn emerald animate delay-4">Google Play</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p>Subscribe to our newsletter for the latest fashion trends and app updates.</p>
+          <div class="newsletter-input">
+            <input type="email" placeholder="Your email address" class="email-input">
+            <button class="submit-btn">Subscribe</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Connect With Us</h4>
+          <div class="social-icons">
+            <a href="#" class="social-icon">
+              <img src="C:/Nu/Programming/AURA website/images/facebook.png" alt="Facebook Icon">
+            </a>
+            <a href="#" class="social-icon">
+              <img src="C:/Nu/Programming/AURA website/images/instagram.png" alt="Instagram Icon">
+            </a>
+            <a href="#" class="social-icon">
+              <img src="C:/Nu/Programming/AURA website/images/twitter.png" alt="Twitter Icon">
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#download">Download</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="aura@nusfortuna.com">Help Center</a></li>
+            <li><a href="https://docs.google.com/document/d/1OplUOXm8uqiqM1EPBuARrRQ55urThxH_ms20pwbtq5E/edit?usp=sharing">Privacy Policy</a></li>
+            <li><a href="https://docs.google.com/document/d/1l-gM2j9Plx0H4Dh3MF2k3BRDrVN-PBQ7A0F80dkEY9w/edit?usp=sharing">Terms of Service</a></li>
+            <li><a href="arpit@nusfortuna.com">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 NUS FORTUNA PRIVATE LIMITED. All rights reserved. 
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Feather icons
+    feather.replace();
+    
+    // Simple scroll animation to reveal elements
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.animate');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      animatedElements.forEach(element => {
+        observer.observe(element);
+      });
+      
+      // App carousel functionality
+      const carouselDots = document.querySelectorAll('.carousel-dot');
+      const carouselSlides = document.querySelectorAll('.carousel-slide');
+      
+      // Manual navigation with dots
+      carouselDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const slideIndex = dot.getAttribute('data-slide');
+          showSlide(slideIndex);
+        });
+      });
+      
+      // Function to show a specific slide
+      function showSlide(slideIndex) {
+        carouselSlides.forEach(slide => slide.classList.remove('active'));
+        carouselDots.forEach(dot => dot.classList.remove('active'));
+        
+        carouselSlides[slideIndex].classList.add('active');
+        carouselDots[slideIndex].classList.add('active');
+      }
+      
+      // Auto-rotate carousel every 3 seconds
+      let currentSlide = 0;
+      
+      function autoRotateCarousel() {
+        currentSlide++;
+        if (currentSlide >= carouselSlides.length) {
+          currentSlide = 0;
+        }
+        showSlide(currentSlide);
+      }
+      
+      // Set the interval for auto-rotation
+      const carouselInterval = setInterval(autoRotateCarousel, 3000);
+      
+      // Pause auto-rotation when interacting with the carousel
+      const carouselContainer = document.querySelector('.carousel-container');
+      
+      carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(carouselInterval);
+      });
+      
+      carouselContainer.addEventListener('mouseleave', () => {
+        setInterval(autoRotateCarousel, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
