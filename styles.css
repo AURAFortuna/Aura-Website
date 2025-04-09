@@ -1035,6 +1035,10 @@ filter: grayscale(0%);
     gap: 40px;
 }
 
+.logo-bar.dupe {
+margin-left: 80px;
+}
+    
 .logo-bar img {
     height: 40px;
 }
